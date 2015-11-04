@@ -42,7 +42,7 @@ public class CacheLogger {
 	public void generateLogFile() {
 		try {
 
-			FileWriter file = new FileWriter("log.json");
+			FileWriter file = new FileWriter("CacheSimulation/log.json");
 			file.write(this.json.toString());
 			file.flush();
 			file.close();
