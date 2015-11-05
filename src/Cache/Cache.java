@@ -119,16 +119,12 @@ public class Cache {
 			LRU.setData(data);
 		}
 		
-		System.out.println("Endereço mapeado:" + this.address.getBaseTwo(5));
-		
+				
 		if (this.cacheResult) {
-			System.out.println("Foi um HIT");
 			this.hits++;
 		} else {
-			System.out.println("Foi um MISS");
 			this.misses++;
 		}
-		System.out.println("----------------------");
 	}
 	
 	/**
@@ -179,5 +175,21 @@ public class Cache {
 	 */
 	public int getMisses() {
 		return this.misses;
+	}
+	
+	/**
+	 * Método que retorna o último endereço mapeado
+	 * @return
+	 */
+	public String getLastAddress() {
+		return this.address.getBaseTwo(5);
+	}
+	
+	/**
+	 * Método que retorna o resultado da cache para o último endereço mapeado
+	 * @return
+	 */
+	public boolean getCacheResult() {
+		return this.cacheResult;
 	}
 }

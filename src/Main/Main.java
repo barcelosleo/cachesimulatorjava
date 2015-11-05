@@ -1,5 +1,6 @@
 package Main;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.json.JSONException;
@@ -12,12 +13,13 @@ import Utils.FileReader;
 
 public class Main {
 	
-	public static void main(String[] args) throws JSONException {
+	public static void main(String[] args) throws JSONException, IOException {
 		
 		Scanner in = new Scanner(System.in);
 		
 		String leituras;
 		String memoriaPrincipal;
+		boolean stepByStep;
 		
 		System.out.println("Nome do arquivo que contém as leituras:[Leituras.txt]");
 		leituras = in.nextLine();
@@ -30,6 +32,9 @@ public class Main {
 		if(memoriaPrincipal.equals("")){
 			memoriaPrincipal = "MemóriaPrincipal.txt";
 		}
+		
+		System.out.println("Executar passo a passo? [1]Sim [0]Não");
+		stepByStep = in.nextInt() != 0;
 		
 		// Lê o arquivo de Memória Principal
 		FileReader mPrincipal = new FileReader(memoriaPrincipal);
@@ -58,7 +63,25 @@ public class Main {
 			Number address = new Number(readings.getLine(j));
 			Number data = mainMemory.read(address.getBaseTen());
 			cache.map(address, data);
-			log.addCacheLog(j, cache.log());
+			if (stepByStep && j != 0) {
+				System.out.println("Pressione qualquer tecla...");
+				System.out.println();
+				if (j == 1) {
+					in.nextLine();
+					in.nextLine();					
+				} else {
+					in.nextLine();
+				}
+			}
+			System.out.println("Passo " + j + " de " + readings.lines());
+			System.out.println("Endereço mapeado:" + cache.getLastAddress());
+			if (cache.getCacheResult()) {
+				System.out.println("Foi um HIT");
+			} else {
+				System.out.println("Foi um MISS");
+			}
+			System.out.println("----------------------");
+			cache.printCache();
 		}
 
 		log.generateLogFile();

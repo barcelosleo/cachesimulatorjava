@@ -100,7 +100,7 @@ public class Way {
 		if (this.validity)
 			System.out.print("|" + 1 + "\t|"+ this.tag.getBaseTwo(3) + "\t|" + this.data.getBaseTwo(16) + "\t|" + this.counter + "\t|");
 		else
-			System.out.print("|" + 0 + "\t|"+ this.tag + "\t|" + this.data + "\t|" + this.counter + "\t|");
+			System.out.print("|" + 0 + "\t|"+ this.tag + "\t|" + this.data + "\t\t\t|" + this.counter + "\t|");
 	}
 	
 	/**

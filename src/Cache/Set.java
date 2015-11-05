@@ -148,17 +148,22 @@ public class Set {
 	 * @return
 	 */
 	public Way LRU() {
-		if (!this.getWay(0).getValidity()){
+		// Se o valor da primeira e da segunda via não é valido
+		if (!this.getWay(0).getValidity() && !this.getWay(1).getValidity()){
 			return this.getWay(0);
-		} else {
-			if (!this.getWay(1).getValidity()){
-				if (this.getWay(0).counter < this.getWay(1).counter) {
-					return this.getWay(0); 
-				} else {
-					return this.getWay(1);
-				}
-			}
+		// Se o valor da primeira via é não valido e o da segunda é válido
+		} else if (!this.getWay(0).getValidity() && this.getWay(1).getValidity()) {
+			return this.getWay(0);
+		// Se o valor da primeira via é valido e o da segunda é não válido
+		} else if (this.getWay(0).getValidity() && !this.getWay(1).getValidity()) {
 			return this.getWay(1);
+		// Os dados das duas vias são válidos
+		} else {
+			if (this.getWay(0).counter > this.getWay(1).counter) {
+				return this.getWay(0); 
+			} else {
+				return this.getWay(1);
+			}
 		}
 	}
 	
